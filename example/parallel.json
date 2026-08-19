@@ -1,0 +1,14 @@
+{
+  "hot": {
+    "mass_flow": 1.8,
+    "specific_heat": 4186,
+    "inlet_temp": 85
+  },
+  "cold": {
+    "mass_flow": 3.0,
+    "specific_heat": 4186,
+    "inlet_temp": 25
+  },
+  "ua": 5000,
+  "flow": "parallel"
+}

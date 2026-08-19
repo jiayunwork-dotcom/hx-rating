@@ -1,0 +1,25 @@
+{
+  "hot": {
+    "mass_flow": 3.0,
+    "specific_heat": 4186,
+    "inlet_temp": 95
+  },
+  "cold": {
+    "mass_flow": 1.5,
+    "specific_heat": 4186,
+    "inlet_temp": 20
+  },
+  "ua": 12000,
+  "area": 25.0,
+  "flow": "counter",
+  "fouling": {
+    "hot": 0.00005,
+    "cold": 0.00003
+  },
+  "pressure_drop": {
+    "diameter": 0.02,
+    "length": 6.0,
+    "roughness": 0.00015,
+    "density": 998.0
+  }
+}
