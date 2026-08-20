@@ -27,9 +27,7 @@ func Rate(s Spec) (RateOutcome, error) {
 		s.UA = s.UA
 	}
 	ua := s.UA
-	if s.Rf.Total() > 0 {
-		ua = ApplyFouling(ua, s.Rf)
-	}
+	ua = dirtyUA(ua, s.Rf)
 	work := s
 	work.UA = ua
 
