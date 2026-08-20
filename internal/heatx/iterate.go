@@ -53,11 +53,7 @@ func IterateLMTD(s Spec, p CapacityPair, guessColdOut float64) IterateOutcome {
 				Converged:  true,
 			}
 		}
-		if actual > q {
-			qLo = q
-		} else {
-			qHi = q
-		}
+		qLo, qHi = nextBracket(actual, q, qLo, qHi)
 	}
 	q := (qLo + qHi) / 2
 	return IterateOutcome{
