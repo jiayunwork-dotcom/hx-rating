@@ -15,7 +15,7 @@ type SweepResult struct {
 
 func SweepUA(s Spec, factors []float64) SweepResult {
 	res := SweepResult{Param: "ua"}
-	for _, f := range factors {
+	for _, f := range prepareFactors(factors) {
 		work := s
 		work.UA = s.UA * f
 		o, err := Rate(work)
