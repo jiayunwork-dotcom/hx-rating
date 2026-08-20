@@ -41,7 +41,7 @@ func formatRate(o heatx.RateOutcome, format string) string {
 		b, _ := json.MarshalIndent(adaptRate(o), "", "  ")
 		return string(b)
 	}
-	return fmt.Sprintf("Q              %.6f W\n", o.QNtu) +
+	text := fmt.Sprintf("Q              %.6f W\n", o.QNtu) +
 		fmt.Sprintf("hot_out        %.6f C\n", o.HotOut) +
 		fmt.Sprintf("cold_out       %.6f C\n", o.ColdOut) +
 		fmt.Sprintf("effectiveness  %.6f\n", o.Eff) +
@@ -50,6 +50,7 @@ func formatRate(o heatx.RateOutcome, format string) string {
 		fmt.Sprintf("feasible       %v\n", o.Feasible) +
 		fmt.Sprintf("energy_resid   %.3e\n", o.Residual) +
 		fmt.Sprintf("ntu_lmtd_diff  %.3e\n", o.RelDiff)
+	return stripFeasible(text)
 }
 
 func writeRateJSON(w io.Writer, o heatx.RateOutcome) {

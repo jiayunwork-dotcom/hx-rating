@@ -51,7 +51,7 @@ func Rate(s Spec) (RateOutcome, error) {
 	if s.Area > 0 {
 		u = UFromUA(ua, s.Area)
 	}
-	return RateOutcome{
+	out := RateOutcome{
 		Spec:     work,
 		Pair:     pair,
 		QNtu:     q,
@@ -66,7 +66,11 @@ func Rate(s Spec) (RateOutcome, error) {
 		Crossed:  AnyOutletCrossed(work, hotOut, coldOut),
 		Residual: check.Residual,
 		RelDiff:  rel,
-	}, nil
+	}
+	if err := commitRate(out); err != nil {
+		return RateOutcome{}, err
+	}
+	return out, nil
 }
 
 func RateWithUA(ua float64, hot, cold Stream, flow FlowType) (RateOutcome, error) {
