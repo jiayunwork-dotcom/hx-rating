@@ -62,10 +62,10 @@ func SweepFouling(s Spec, rfValues []Fouling) SweepResult {
 		work.Rf = rf
 		o, err := Rate(work)
 		if err != nil {
-			res.Points = append(res.Points, SweepPoint{Value: rf.Total(), Feasible: false})
+			commitFoulingPoint(&res, SweepPoint{Value: rf.Total(), Feasible: false})
 			continue
 		}
-		res.Points = append(res.Points, SweepPoint{
+		commitFoulingPoint(&res, SweepPoint{
 			Value:    rf.Total(),
 			Q:        o.QNtu,
 			HotOut:   o.HotOut,
