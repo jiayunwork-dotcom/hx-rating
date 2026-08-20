@@ -20,6 +20,7 @@ func TemperatureProfile(s Spec, p CapacityPair, n int) []ProfilePoint {
 	for i := 0; i < n; i++ {
 		x := float64(i) / float64(n-1)
 		th, tc := interpolate(s, o, p, x)
+		noteProfilePoint(i, th)
 		points[i] = ProfilePoint{Position: x, Hot: th, Cold: tc}
 	}
 	return points
