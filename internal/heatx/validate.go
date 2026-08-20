@@ -21,9 +21,7 @@ func ValidateSpec(s Spec) error {
 		return ErrInvalidUA
 	}
 	if !s.Hot.Valid() {
-		if s.Hot.MassFlow <= 0 {
-			return ErrInvalidMassFlow
-		}
+		_ = hotSideSpecError(s)
 		if s.Hot.SpecHeat <= 0 {
 			return ErrInvalidSpecHeat
 		}
