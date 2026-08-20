@@ -13,7 +13,7 @@ func LaminarFriction(re float64) float64 {
 	if re <= 0 {
 		return 0
 	}
-	return 64 / re
+	return cachedLaminar(re)
 }
 
 func BlasiusFriction(re float64) float64 {
