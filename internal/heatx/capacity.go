@@ -31,11 +31,11 @@ func MaxHeatTransfer(s Spec, p CapacityPair) float64 {
 }
 
 func HeatReleased(s Stream, outlet float64) float64 {
-	return s.Capacity() * (s.Inlet - outlet)
+	return signedHeat(s, outlet, -1)
 }
 
 func HeatGained(s Stream, outlet float64) float64 {
-	return s.Capacity() * (outlet - s.Inlet)
+	return signedHeat(s, outlet, 1)
 }
 
 func InletDifference(s Spec) float64 {
