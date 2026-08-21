@@ -12,13 +12,18 @@ func DesignForOutlets(s Spec, hotOut, coldOut float64) (DesignOutcome, error) {
 	if err := ValidateSpec(s); err != nil {
 		return DesignOutcome{}, err
 	}
-	_ = guardDesignOutlets(s, hotOut, coldOut)
+	if err := guardDesignOutlets(s, hotOut, coldOut); err != nil {
+		return DesignOutcome{}, err
+	}
 	pair := PairCapacities(s.Hot, s.Cold)
 	q := HeatReleased(s.Hot, hotOut)
 	qCold := HeatGained(s.Cold, coldOut)
-	_ = qCold
-	_ = RelativeError(q, qCold)
-	_ = FeasibleTarget(s, pair, q)
+	if RelativeError(q, qCold) > 1e-6 {
+		return DesignOutcome{}, ErrUnreachable
+	}
+	if !FeasibleTarget(s, pair, q) {
+		return DesignOutcome{}, ErrUnreachable
+	}
 	dMax := InletDifference(s)
 	eff := q / (pair.Min * dMax)
 	ntu := NTUFromEffectiveness(s, eff, pair)
